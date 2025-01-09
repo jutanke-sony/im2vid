@@ -24,6 +24,7 @@ def run():
         framerate=1,
         per_frame_rendering_fn=render_fn,
         Data=Data,
+        n_workers=0
     )
 
 

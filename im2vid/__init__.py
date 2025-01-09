@@ -33,7 +33,10 @@ def create_video(
             img_fname = join(tmpdirname, f"{i:09d}.{fileext}")
             Data_augm.append((img_fname, data))
 
-        if use_threading:
+        if n_workers == 0:
+            for fname_and_data in tqdm(Data_augm, disable=not use_tqdm):
+                per_frame_rendering_fn(fname_and_data)
+        elif use_threading:
             with ThreadPool(n_workers) as p:
                 _ = list(
                     tqdm(
