@@ -24,6 +24,8 @@ def create_video(
     assert len(Data) < 99999999, f"Data must not be too large (#Data={len(Data)})"
     assert "." not in fileext, f"fileext '{fileext}' must not contain '.'"
     n_workers = min(n_workers, len(Data))
+    if n_workers == 0 or n_workers == 1:
+        use_threading = True
 
     with tempfile.TemporaryDirectory() as tmpdirname:
         Data_augm = []
