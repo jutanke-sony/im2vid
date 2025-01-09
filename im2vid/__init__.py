@@ -8,7 +8,7 @@ from typing import List
 from tqdm import tqdm
 
 
-def multiprocessing_rendering(
+def create_video(
     video_fname: str,
     framerate: int,
     per_frame_rendering_fn,

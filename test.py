@@ -1,5 +1,5 @@
 import matplotlib.pyplot as plt
-from im2vid import multiprocessing_rendering
+from im2vid import create_video
 
 
 def render_fn(fname_and_data):
@@ -19,7 +19,7 @@ def render_fn(fname_and_data):
 
 def run():
     Data = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j"]
-    multiprocessing_rendering(
+    create_video(
         video_fname="test.mp4",
         framerate=1,
         per_frame_rendering_fn=render_fn,
