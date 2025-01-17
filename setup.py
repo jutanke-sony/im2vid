@@ -2,9 +2,9 @@ from setuptools import setup, find_packages
 
 setup(
     name="im2vid",
-    version="0.1.5",
+    version="0.1.6",
     packages=find_packages(),
-    install_requires=["matplotlib", "moviepy", "tqdm"],
+    install_requires=["matplotlib", "moviepy", "tqdm", "einops"],
     author="Julian Tanke",
     author_email="Julian.Tanke@sony.com",
     description="A utility for converting images to videos",
