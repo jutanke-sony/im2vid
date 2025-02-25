@@ -32,6 +32,11 @@ def get_lims_from_3d(pts3d):
     return xlim, ylim, zlim
 
 
+def set_lims(ax, pts3d):
+    # "fix" the typo function name "set_xlim" - but remain backward compatible
+    # as this has been used in so many places...
+    set_xlim(ax, pts3d)
+
 def set_xlim(ax, pts3d):
     xlim, ylim, zlim = get_lims_from_3d(pts3d=pts3d)
     ax.set_xlim(xlim)

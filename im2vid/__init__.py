@@ -6,6 +6,50 @@ from os.path import join
 from multiprocessing.pool import Pool, ThreadPool
 from typing import List
 from tqdm import tqdm
+import numpy as np
+import matplotlib.pylab as plt
+
+
+def save_image_to_file_fn(fname_and_data):
+    fname, data = fname_and_data
+    img = data["img"]
+    plt.imsave(fname, img)
+
+
+def create_video_from_images(
+    video_fname: str,
+    framerate: int,
+    images: np.ndarray,
+    *,
+    n_workers: int = 15,
+    fileext: str = "png",
+    use_tqdm: bool = True,
+    use_threading: bool = False,
+):
+    """
+    :param video_fname: filename of the video to be created
+    :param framerate: framerate of the video
+    :param images: images to be converted to a video {t x h x w x 3}
+    """
+    assert video_fname.endswith(".mp4"), "video_fname must end with '.mp4'"
+    assert len(images) > 0, "images must not be empty"
+    assert (
+        len(images.shape) == 4 and images.shape[3] == 3
+    ), f"images must have shape [t x h x w x 3] but has {images.shape}"
+
+    Data = []
+    for img in images:
+        Data.append({"img": img})
+    create_video(
+        video_fname=video_fname,
+        framerate=framerate,
+        per_frame_rendering_fn=save_image_to_file_fn,
+        Data=Data,
+        n_workers=n_workers,
+        fileext=fileext,
+        use_tqdm=use_tqdm,
+        use_threading=use_threading,
+    )
 
 
 def create_video(
